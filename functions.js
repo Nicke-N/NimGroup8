@@ -15,6 +15,7 @@ function startgame() {
         console.log("woho");
 
         let gameboard = document.createElement("p"); //skapar P som ska innehålla gameboard
+        gameboard.id = "dispSticks";
         let gamenav = document.createElement("p"); //P som ska innehålla navigation, gamenav
         let gamelog = document.createElement("p");
         let alloptions = document.createElement("select"); //samlar alla options nedan
@@ -34,6 +35,7 @@ function startgame() {
             specificoption.textContent = eachoption;
             specificoption.value = eachoption; //tror ej denna behövs men lämnar den här ifall ni vill använda den
             alloptions.appendChild(specificoption); // alloptions(select) hämtar options en i taget
+            alloptions.id = "options"; //la till classen "options" så att man kan få tag i values
         }
         let button = document.createElement("button"); //skapar knapp
         button.setAttribute("onclick", "draw()"); //med attributen att kunna tillkalla en funktion
@@ -65,13 +67,17 @@ function draw() {
         document.getElementById("player1").classList.remove("playing");
         document.getElementById("player2").classList.add("playing");
         button.value = 2;   //efter turen blir button value 2, vilket e p2s tur.
+
+
     } else if(button.value == 2){
 
 
         document.getElementById("player1").classList.add("playing");
         document.getElementById("player2").classList.remove("playing");
         button.value = 1;
+
     }
 
-}
+ 
 
+}
