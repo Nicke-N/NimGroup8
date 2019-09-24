@@ -6,14 +6,18 @@
         <title>Nim</title>
     </head>
     <body>
-        <div id="beginning">
-            <p>Player1 name:
+        <div id="headerMain">
+            <h1>Welcome to the game of sticks!</h1>
+            <h2>(riveting, we know)</h2>
+        </div>
+        <div id="beginning" class="hide">
+            <p class="player1Label">Player1 name:
             <input type="text" id="player1input">
             </p>
-            <p>Player2 name:
+            <p class="player2Label">Player2 name:
             <input type="text" id="player2input">
             </p>
-            <button onclick="startgame()">Start the game</button>
+            <button class="btn" onclick="startgame()">Start the game</button>
         </div>
         <div id="players" class="hide">
             <textarea id="player1" class="playing" cols="30" rows="1" readonly></textarea>

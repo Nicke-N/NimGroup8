@@ -1,3 +1,43 @@
+@keyframes fadeinH1{
+    0%{
+        opacity: 0;
+    }    
+    50%{
+        opacity: 1;
+    }  
+    75%{
+        opacity: 1;
+    }  
+    100%{
+        opacity: 1;
+    }    
+}
+@keyframes fadeinH2{
+    0%{
+        opacity: 0;
+    }    
+    50%{
+        opacity: 0;
+    }  
+    75%{
+        opacity: 1;
+    }  
+    100%{
+        opacity: 1;
+    }    
+}
+@keyframes slidein{
+    0%{
+        transform: translateX(-100%) 
+    }
+    100%{
+        transform: translateX(0%)
+    }
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
 .hide{
     display:none;
 }
@@ -6,4 +46,38 @@ textarea{
 }
 .playing{
     background: lime;
+}
+h1{
+    text-align: center;
+    animation-duration: 3s;
+    animation-name: fadeinH1;
+}
+h2{
+    text-align: center;
+    animation-duration: 3.5s;
+    animation-name: fadeinH2;
+    
+}
+#beginning{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20% 20% 20% 20% 20% 20%;
+    grid-template-rows: 50% 50% 50% 50% 50% 50% 50% 50% 50% 50%;
+    animation: 1.3s slidein;
+  }
+  .player1Label{
+      grid-column-start: 3;
+      grid-row-start: 2;
+      background-color: cornflowerblue;
+      padding: 10px;
+  }
+  .player2Label{
+    grid-column-start: 3;
+    grid-row-start: 3;
+    background-color: cornflowerblue;
+    padding: 10px;
+}
+.btn{
+    grid-column-start: 3;
+    grid-row-start: 4;
+    height: 30px;
 }
