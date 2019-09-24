@@ -10,7 +10,7 @@ function startgame() {
         player1.textContent = document.getElementById("player1input").value;
         player2.textContent = document.getElementById("player2input").value;
 
-        document.getElementById("beginning").classList.add("hide"); //gömmer en div
+        document.getElementById("beginning").style.display = "none"; //gömmer en div
         document.getElementById("players").classList.remove("hide"); //visar en annan
         console.log("woho");
 
@@ -74,3 +74,4 @@ function draw() {
     }
 
 }
+
