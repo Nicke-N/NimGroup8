@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="style.css">
+        <title>Nim</title>
+    </head>
+    <body>
+        <div id="beginning">
+            <p>Player1 name:
+            <input type="text" id="player1input">
+            </p>
+            <p>Player2 name:
+            <input type="text" id="player2input">
+            </p>
+            <button onclick="startgame()">Start the game</button>
+        </div>
+        <div id="players" class="hide">
+            <textarea id="player1" class="playing" cols="30" rows="1" readonly></textarea>
+            <textarea id="player2" cols="30" rows="1" readonly></textarea>
+        </div>
+        <div id="gamecontent">
+             
+        </div>
+        <script src="functions.js"></script>
+    </body>
+</html>
