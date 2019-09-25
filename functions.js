@@ -67,13 +67,28 @@ function startgame() {
 }
 
 function draw() {
-    
+    let gameboard = document.getElementById("dispSticks");
     let button = document.getElementById("play"); //hämtar knapp med id
     // let allsticks = localStorage.getItem("theboard"); //hämtar array med sticks
+    removeStick();
+    let activeplayer = document.getElementsByClassName("playing");
+    let html2array = Array.from(activeplayer);
+    let player = html2array.map((element) => {
+    return element.textContent;
+    });
+    let e = document.getElementById("options");
     
+    document.getElementById("gamelog").textContent += player[0] + " drew " + e.options[e.selectedIndex].value + " sticks!\n";
+    
+  
+    if(gameboard.children.length == 0){
+        
+        document.getElementById("gamelog").textContent += player[0] + " lost the game!";
+        document.getElementById("play").disabled = true;
+    } else {
     if(button.value == 1) { //om knappen har 1 i value, som under p1's tur, händer detta
 
-        removeStick();
+        
         document.getElementById("player1").classList.remove("playing");
         document.getElementById("player2").classList.add("playing");
         button.value = 2;   //efter turen blir button value 2, vilket e p2s tur.
@@ -81,13 +96,13 @@ function draw() {
 
     } else if(button.value == 2){
 
-        removeStick();
+       
         document.getElementById("player1").classList.add("playing");
         document.getElementById("player2").classList.remove("playing");
         button.value = 1;
 
     }
-
+    }
  
 
 }
@@ -98,10 +113,13 @@ function removeStick() {
     var removeStickValue = Number(e.options[e.selectedIndex].value);
     console.log(removeStickValue);
     let gameboard = document.getElementById("dispSticks");
-
-    for (let i = 0; i < removeStickValue; i++) {
-        gameboard.removeChild(gameboard.childNodes[i]);
+    let arrayofgamebooad = Array.from(gameboard);
+    let sticktoberemoved = 0;
+    for (let i = 0; i < removeStickValue; i++) {        
+        gameboard.removeChild(gameboard.children[sticktoberemoved]);
         console.log(i);
+        console.log(gameboard);
+        
     }
-
+    console.log(gameboard.children.length);
 }
