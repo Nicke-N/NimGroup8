@@ -81,3 +81,14 @@ h2{
     grid-row-start: 4;
     height: 30px;
 }
+
+#dispSticks {
+    display: flex;
+    flex-direction: row;
+}
+.stick {
+    background-color: chocolate;
+    width: 10px;
+    height: 50px;
+    margin-right: 5px;
+}
