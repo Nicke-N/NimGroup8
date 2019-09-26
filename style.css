@@ -1,3 +1,4 @@
+/*Keyframes för startsidans animation*/
 @keyframes fadeinH1{
     0%{
         opacity: 0;
@@ -34,15 +35,17 @@
         transform: translateX(0%)
     }
 }
-
+/*Startsidans styling*/
 body{
     font-family: Arial, Helvetica, sans-serif;
+    padding-top: 150px;
 }
 .hide{
     display:none;
 }
 textarea{
-    resize: none;
+    width: auto;
+
 }
 .playing{
     background: lime;
@@ -51,44 +54,84 @@ h1{
     text-align: center;
     animation-duration: 3s;
     animation-name: fadeinH1;
+    grid-column-start: 4;
+    grid-row-start: 1;
+    min-width: 500px;
 }
 h2{
     text-align: center;
     animation-duration: 3.5s;
     animation-name: fadeinH2;
-    
+    grid-column-start: 4;
+    grid-row-start: 3;
+    min-width: 500px;
 }
-#beginning{
+/*Grid för startsidan*/
+#beginning, #headerMain{
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20% 20% 20% 20% 20% 20%;
-    grid-template-rows: 50% 50% 50% 50% 50% 50% 50% 50% 50% 50%;
+    grid-template-columns: 13.3% 13.3% 13.3% 20% 13.3% 13.3% 13.3%;
+    grid-template-rows: 42% 42% 42%;
     animation: 1.3s slidein;
+    justify-items: center;
+
   }
   .player1Label{
-      grid-column-start: 3;
+      grid-column-start: 4;
       grid-row-start: 2;
       background-color: cornflowerblue;
+      min-width: 250px;
       padding: 10px;
   }
   .player2Label{
-    grid-column-start: 3;
+    grid-column-start: 4;
     grid-row-start: 3;
     background-color: cornflowerblue;
+    min-width: 250px;
     padding: 10px;
 }
+input{
+    width: 50%;
+    min-width: 250px;
+}
 .btn{
-    grid-column-start: 3;
+    grid-column-start: 4;
     grid-row-start: 4;
     height: 30px;
+    min-width: 270px;
 }
 
 #dispSticks {
     display: flex;
     flex-direction: row;
+    grid-column-start: 5;
+    grid-row-start: 3;
 }
 .stick {
     background-color: chocolate;
     width: 10px;
     height: 50px;
     margin-right: 5px;
+    grid-column-start: 4;
+    grid-row-start: 4;
+}
+
+#gamecontent{
+    display: grid;
+    grid-template-columns: 13.3% 13.3% 13.3% 20% 13.3% 13.3% 13.3%;
+    grid-template-rows: 42% 42% 42%;
+    animation: 1.3s slidein;
+
+  }
+
+#nav{
+    grid-column-start: 5;
+    grid-row-start: 2;
+}
+#log{
+    grid-column-start: 4;
+    grid-row-start: 2;
+}
+#players{
+    grid-column-start: 3;
+    grid-row-start: 2;
 }

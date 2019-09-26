@@ -19,7 +19,9 @@ function startgame() {
         let gameboard = document.createElement("div"); //skapar DIV som ska innehålla gameboard
         gameboard.id = "dispSticks";
         let gamenav = document.createElement("div"); //DIV som ska innehålla navigation, gamenav
+        gamenav.id = "nav";
         let gamelog = document.createElement("div");
+        gamelog.id = "log";
         let alloptions = document.createElement("select"); //samlar alla options nedan
         let log = document.createElement("textarea");   //log skpaas o innehåller textarea
         log.id = "gamelog"; //log for id, log:en ska visa vems tur det är, vem som gjort vad osv.

@@ -10,6 +10,7 @@
             <h1>Welcome to the game of sticks!</h1>
             <h2>(riveting, we know)</h2>
         </div>
+        <div>
         <div id="beginning" class="hide">
             <p class="player1Label">Player1 name:
             <input type="text" id="player1input">
@@ -19,12 +20,12 @@
             </p>
             <button class="btn" onclick="startgame()">Start the game</button>
         </div>
-        <div id="players" class="hide">
-            <textarea id="player1" class="playing" cols="30" rows="1" readonly></textarea>
-            <textarea id="player2" cols="30" rows="1" readonly></textarea>
-        </div>
+        
         <div id="gamecontent">
-             
+            <div id="players" class="hide">
+                <textarea id="player1" class="playing" cols="30" rows="1" readonly></textarea>
+                <textarea id="player2" cols="30" rows="1" readonly></textarea>
+            </div>
         </div>
         <script src="functions.js"></script>
     </body>
