@@ -45,7 +45,7 @@ body{
 }
 textarea{
     width: auto;
-
+    resize: none;
 }
 .playing{
     background: lime;
@@ -123,7 +123,7 @@ input{
 
   }
 
-#nav{
+#gameInput{
     grid-column-start: 5;
     grid-row-start: 2;
 }

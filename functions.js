@@ -1,23 +1,28 @@
 // "Global" variable
 let allsticks = []; 
 let gameboard;
-let gamenav;
+let gameInput;
 let gamecontent;
+let drawButton;
+let totalSticks = 21;
 
 function startgame() {
-
-    let player1 = document.getElementById("player1"); //hämtar textrutor som ej syns
-    let player2 = document.getElementById("player2");
-    gamecontent = document.getElementById("gamecontent"); //samma här, men själva div där spelet kmr va
-
-
+    /**
+     * check to see if the players have filled in the names
+     * start the game if done
+     * else if not, player will be alertade to fill in the names
+     */
     if (!document.getElementById("player1input").value == "" &&
-        !document.getElementById("player2input").value == "") { //ifall inputs til spelarnamn inte är tomma händer detta
+        !document.getElementById("player2input").value == "") { 
+        //Display the player names that was inputed
+        let player1 = document.getElementById("player1"); 
+        let player2 = document.getElementById("player2");
         player1.textContent = document.getElementById("player1input").value;
         player2.textContent = document.getElementById("player2input").value;
-
-        document.getElementById("beginning").style.display = "none"; //gömmer en div
-        document.getElementById("players").classList.remove("hide"); //visar en annan
+        
+        //hides the name input fields
+        document.getElementById("beginning").style.display = "none";
+        document.getElementById("players").classList.remove("hide");
 
         createGameboard();
         
@@ -26,34 +31,119 @@ function startgame() {
     }
 }
 
-function createGameboard() {
-    gameboard = document.createElement("div"); //skapar DIV som ska innehålla gameboard
-    gameboard.id = "dispSticks";
-    gamenav = document.createElement("div"); //DIV som ska innehålla navigation, gamenav
-    gamenav.id = "nav";
-    
-    createGameLog();
-    createAllSticks();   
-    createOptionPicker();
 
-    gamecontent.appendChild(gameboard); // gamecontent hämtar gameboard och gamenav.
-    gamecontent.appendChild(gamenav);
+/**
+ * Creates a div for the gameboard and game input that is then appended to the gameconent 
+ */
+function createGameboard() {
+    //for accesing the gameconent div
+    gamecontent = document.getElementById("gamecontent");
+
+    gameboard = document.createElement("div"); 
+    gameboard.id = "dispSticks";
+    gameInput = document.createElement("div");
+    gameInput.id = "gameInput";
+    
+    //Calls all the function to create the specific parts of the gameboard
+    createGameLog();
+    createOptionPicker();
+    createDrawButton();
+    createAllSticks();   
+
+    gamecontent.appendChild(gameInput);
+    gamecontent.appendChild(gameboard); 
 
 }
 
+/**
+ * Creates a div for gamelog and then an textarea to place inside the div
+ */
 function createGameLog() {
     let gamelog = document.createElement("div");
     gamelog.id = "log";
-    let log = document.createElement("textarea");   //log skpaas o innehåller textarea
-    log.id = "gamelog"; //log for id, log:en ska visa vems tur det är, vem som gjort vad osv.
-    log.setAttribute("rows", "23"); // log for rows
-    log.setAttribute("cols", "20"); //log for cols
+    let log = document.createElement("textarea"); 
+    log.id = "gamelog";
+    log.setAttribute("rows", "23"); 
+    log.setAttribute("cols", "20"); 
     gamelog.appendChild(log);
     gamecontent.appendChild(gamelog);
 }
 
+/**
+ * Creates a select element
+ * A loop that creates 3 options with values 1-3
+ * and appends it to the gameInput div
+ */
+function createOptionPicker() {
+    let alloptions = document.createElement("select"); 
+    for (let eachoption = 1; eachoption < 4; eachoption++) {
+        let specificoption = document.createElement("option"); 
+        specificoption.id = "op" + eachoption;
+        specificoption.textContent = eachoption;
+        specificoption.value = eachoption; 
+        alloptions.id = "options"; 
+        alloptions.appendChild(specificoption); 
+    }
+    gameInput.appendChild(alloptions); 
+}
+
+/**
+ * creates a button named Draw Sticks with a value to check player active
+ * and attach the draw function to it
+ * appends to the gameInput
+ */
+function createDrawButton() {
+    drawButton = document.createElement("button"); 
+    drawButton.setAttribute("onclick", "draw()"); 
+    drawButton.textContent = "Draw sticks";
+    drawButton.setAttribute("value", "1");
+    drawButton.id = "draw";
+    gameInput.appendChild(drawButton);
+}
+
+function draw() {
+    removeStick();
+
+    //prints the players name, the sticks that is drawn and left
+    let activeplayer = document.getElementsByClassName("playing");
+    let html2array = Array.from(activeplayer);
+    let player = html2array.map((element) => {
+        return element.textContent;
+    });
+    let optionValue = document.getElementById("options");
+    document.getElementById("gamelog").textContent += player[0] + " drew " + optionValue.options[optionValue.selectedIndex].value + " sticks!\n" + totalSticks + " left\n";
+    // always scroll the gamelog/textarea to bottom
+    document.getElementById("gamelog").scrollTop = document.getElementById("gamelog").scrollHeight;
+
+    /**
+     * check if the last sticks are being drawn and if so print that the player has lost
+     * and end game
+     * else change to the other player
+     */
+    if(gameboard.children.length <= 0){
+        document.getElementById("gamelog").textContent += player[0] + " lost the game!";
+        document.getElementById("draw").disabled = true;
+    } else {
+        //Switch player with button value and change the background color of the active player
+        if(drawButton.value == 1) { 
+            document.getElementById("player1").classList.remove("playing");
+            document.getElementById("player2").classList.add("playing");
+            drawButton.value = 2;
+        } else if(drawButton.value == 2){
+            document.getElementById("player1").classList.add("playing");
+            document.getElementById("player2").classList.remove("playing");
+            drawButton.value = 1;
+        }
+    }
+ 
+
+}
+
+/**
+ * Creates the sticks as divs and place them in an array and then appends all of them on the to the gameboard
+ */
 function createAllSticks() {
-    for (let eachstick = 0; eachstick < 21; eachstick++) { //fyller array med sticks
+    for (let eachstick = 0; eachstick < totalSticks; eachstick++) {
         let theStick = document.createElement("div")
         theStick.className = "stick"
         theStick.id = "sNr" + eachstick;
@@ -64,58 +154,9 @@ function createAllSticks() {
     }
 }
 
-function createOptionPicker() {
-    let alloptions = document.createElement("select"); //samlar alla options nedan
-    for (let eachoption = 1; eachoption < 4; eachoption++) {
-        let specificoption = document.createElement("option"); //skapar options 1 - 3
-        specificoption.id = "op" + eachoption;
-        specificoption.textContent = eachoption;
-        specificoption.value = eachoption; //tror ej denna behövs men lämnar den här ifall ni vill använda den
-        alloptions.appendChild(specificoption); // alloptions(select) hämtar options en i taget
-        alloptions.id = "options"; //la till classen "options" så att man kan få tag i values
-    }
-    let button = document.createElement("button"); //skapar knapp
-    button.setAttribute("onclick", "draw()"); //med attributen att kunna tillkalla en funktion
-    button.textContent = "Draw sticks"; //Vad som står på knappen
-    button.setAttribute("value", "1"); //button får value som används för att byta spelare.
-    button.id = "play";
-
-    gamenav.appendChild(alloptions); //gamenav(p) hämtar alloptions som fyllts med options.
-    gamenav.appendChild(button); //gamenav hämtar button
-}
-
-function draw() {
-    let gameboard = document.getElementById("dispSticks");
-
-    removeStick();
-    let activeplayer = document.getElementsByClassName("playing");
-    let html2array = Array.from(activeplayer);
-    let player = html2array.map((element) => {
-        return element.textContent;
-    });
-    
-    let optionValue = document.getElementById("options");
-    document.getElementById("gamelog").textContent += player[0] + " drew " + optionValue.options[optionValue.selectedIndex].value + " sticks!\n";
-
-    if(gameboard.children.length <= 0){
-        document.getElementById("gamelog").textContent += player[0] + " lost the game!";
-        document.getElementById("play").disabled = true;
-    } else {
-        if(button.value == 1) { //om knappen har 1 i value, som under p1's tur, händer detta
-            document.getElementById("player1").classList.remove("playing");
-            document.getElementById("player2").classList.add("playing");
-            button.value = 2;   //efter turen blir button value 2, vilket e p2s tur.
-            } else if(button.value == 2){
-                document.getElementById("player1").classList.add("playing");
-                document.getElementById("player2").classList.remove("playing");
-                button.value = 1;
-            }
-    }
- 
-
-}
-
-// function tar bort stickor, kollar först vad man har valt
+/**
+ * Check the player input and removes that amount of sticks
+ */
 function removeStick() {
     let optionValue = document.getElementById("options");
     let removeStickValue = Number(optionValue.options[optionValue.selectedIndex].value);
@@ -123,9 +164,8 @@ function removeStick() {
     let sticktoberemoved = 0;
         for (let i = 0; i < removeStickValue; i++) {        
             gameboard.removeChild(gameboard.children[sticktoberemoved]);
-            console.log(i);
-            console.log(gameboard);
+            console.log(totalSticks--);
+            // break if the player is picking more than what's left on the board
             if(gameboard.children.length <= 0) break;
         }
-    console.log(gameboard.children.length);
 }
