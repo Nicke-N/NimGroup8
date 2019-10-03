@@ -123,6 +123,14 @@ function draw() {
     if(gameboard.children.length <= 0){
         document.getElementById("gamelog").textContent += player[0] + " lost the game!";
         document.getElementById("draw").disabled = true;
+        //Create a button to reload the game/page
+        let reloadBtn = document.createElement("button");
+        reloadBtn.setAttribute("value" , "Refresh Page");
+        reloadBtn.setAttribute("onClick", "window.location.reload()");
+        reloadBtn.innerText = "Play Again";
+        gameInput.appendChild(reloadBtn);
+
+
     } else {
         //Switch player with button value and change the background color of the active player
         if(drawButton.value == 1) { 
