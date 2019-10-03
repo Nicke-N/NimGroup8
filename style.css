@@ -103,6 +103,7 @@ input{
 #dispSticks {
     display: flex;
     flex-direction: row;
+    min-width: 500px;
     grid-column-start: 5;
     grid-row-start: 3;
 }
